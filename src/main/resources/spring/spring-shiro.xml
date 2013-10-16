@@ -33,7 +33,7 @@
 
     <bean id="onlineSessionFactory" class="org.apache.shiro.session.mgt.OnlineSessionFactory"/>
      -->
-    <bean id="myBatisRealm" class="com.smarterp.shiro.realm.AuthenticationRealm"></bean>
+    <bean id="myBatisRealm" class="com.vita.erp.shiro.realm.AuthenticationRealm"></bean>
     <!-- manager -->
     <!-- Remembered vs Authenticated http://www.ituring.com.cn/article/287 -->
     <bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">
@@ -98,7 +98,7 @@
         <property name="onlineSessionDAO" ref="onlineSessionDAO"/>
     </bean>  -->
 
-    <bean id="jCaptchaValidateFilter" class="com.smarterp.filter.jcaptcha.JCaptchaValidateFilter">
+    <bean id="jCaptchaValidateFilter" class="com.vita.erp.filter.jcaptcha.JCaptchaValidateFilter">
         <property name="jcaptchaEbabled" value="${shiro.jcaptcha.enable}"/>
         <property name="jcaptchaParam" value="jcaptchaCode"/>
         <property name="jcapatchaErrorUrl" value="${shiro.jcaptcha.error.url}"/>

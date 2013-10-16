@@ -62,7 +62,7 @@
     </tx:advice>
 
     <aop:config proxy-target-class="true">
-        <aop:pointcut id="interceptorPointCuts" expression="execution(* com.smarterp.*.*(..))"/>
+        <aop:pointcut id="interceptorPointCuts" expression="execution(* com.vita.*.*(..))"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="interceptorPointCuts"/>
     </aop:config>
 
@@ -70,7 +70,7 @@
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"/>
-        <property name="typeAliasesPackage" value="com.smarterp.entity.sys" />
+        <property name="typeAliasesPackage" value="com.vita.erp.entity.sys" />
         <property name="mapperLocations">
             <array>
                 <value>classpath*:mybatis/sqlmap/*.xml</value>
@@ -79,7 +79,7 @@
     </bean>
     <!-- scan for mappers and let them be autowired -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.smarterp.shiro.persistence" />
+        <property name="basePackage" value="com.vita.erp.shiro.persistence" />
     </bean>
 
     <aop:aspectj-autoproxy expose-proxy="true"/>
