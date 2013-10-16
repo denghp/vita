@@ -11,9 +11,9 @@ import com.vita.erp.exception.SearchException;
 import com.vita.erp.filter.search.SearchFilter;
 import com.vita.erp.filter.search.SearchRequest;
 import com.vita.erp.utils.SearchOperator;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
+import java.awt.print.Pageable;
 import java.util.Collection;
 import java.util.Map;
 
@@ -50,29 +50,34 @@ public abstract class Searchable {
      *
      * @return
      */
+    /**
     public static Searchable newSearchable(final Map<String, Object> searchParams, final Pageable page)
             throws SearchException {
         return new SearchRequest(searchParams, page);
     }
+     **/
 
     /**
      * 创建一个新的查询
      *
      * @return
      */
+    /**
     public static Searchable newSearchable(final Map<String, Object> searchParams, final Sort sort)
             throws SearchException {
         return new SearchRequest(searchParams, sort);
     }
-
+       **/
     /**
      * 创建一个新的查询
      *
      * @return
      */
+    /**
     public static Searchable newSearchable(final Map<String, Object> searchParams, final Pageable page, final Sort sort) {
         return new SearchRequest(searchParams, page, sort);
     }
+     **/
 
 
     /**
@@ -171,7 +176,7 @@ public abstract class Searchable {
 
     public abstract Searchable addSort(final Sort sort);
 
-    public abstract Searchable addSort(final Sort.Direction direction, String property);
+    //public abstract Searchable addSort(final Sort.Direction direction, String property);
 
 
     /**

@@ -57,7 +57,7 @@
     <!-- 验证码过滤器需要放到Shiro之后 因为Shiro将包装HttpSession 如果不 可能造成两次的sesison id 不一样 -->
     <filter>
         <filter-name>JCaptchaFilter</filter-name>
-        <filter-class>com.vita.jcaptcha.JCaptchaFilter</filter-class>
+        <filter-class>com.vita.erp.filter.jcaptcha.JCaptchaFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>JCaptchaFilter</filter-name>
@@ -68,23 +68,11 @@
     <!-- 错误页面映射 -->
     <error-page>
         <error-code>404</error-code>
-        <location>/WEB-INF/jsp/error/error.jsp</location>
-    </error-page>
-    <error-page>
-        <error-code>400</error-code>
-        <location>/WEB-INF/jsp/error/error.jsp</location>
+        <location>/error-404.html</location>
     </error-page>
     <error-page>
         <error-code>500</error-code>
-        <location>/WEB-INF/jsp/error/error.jsp</location>
-    </error-page>
-    <error-page>
-        <error-code>503</error-code>
-        <location>/WEB-INF/jsp/error/error.jsp</location>
-    </error-page>
-    <error-page>
-        <exception-type>java.lang.Exception</exception-type>
-        <location>/WEB-INF/jsp/error/error.jsp</location>
+        <location>/error-500.html</location>
     </error-page>
 
 
@@ -93,7 +81,7 @@
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>classpath:spring-mvc.xml</param-value>
+            <param-value>/WEB-INF/spring-mvc.xml</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
@@ -102,4 +90,8 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
+    <welcome-file-list>
+        <welcome-file>/login.html</welcome-file>
+        <welcome-file>/login.jsp</welcome-file>
+    </welcome-file-list>
 </web-app>

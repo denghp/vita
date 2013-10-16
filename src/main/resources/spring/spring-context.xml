@@ -47,23 +47,29 @@
 
     <tx:advice id="txAdvice" transaction-manager="transactionManager">
         <tx:attributes>
-            <tx:method name="delete*" propagation="REQUIRED" read-only="false"
-                       rollback-for="java.lang.Exception" no-rollback-for="java.lang.RuntimeException"/>
-            <tx:method name="insert*" propagation="REQUIRED" read-only="false"
-                       rollback-for="java.lang.RuntimeException"/>
-            <tx:method name="save*" propagation="REQUIRED" read-only="false"
-                       rollback-for="java.lang.RuntimeException"/>
-            <tx:method name="update*" propagation="REQUIRED" read-only="false"
-                       rollback-for="java.lang.Exception"/>
-            <tx:method name="find*" propagation="SUPPORTS"/>
-            <tx:method name="get*" propagation="SUPPORTS"/>
-            <tx:method name="select*" propagation="SUPPORTS"/>
+            <tx:method name="doReweight" propagation="REQUIRES_NEW"/>
+            <tx:method name="doClear*" propagation="REQUIRES_NEW"/>
+            <tx:method name="doSend*" propagation="REQUIRES_NEW"/>
+            <tx:method name="doBatchSave*" propagation="REQUIRES_NEW"/>
+
+            <!--hibernate4必须配置为开启事务 否则 getCurrentSession()获取不到-->
+            <tx:method name="get*" propagation="REQUIRED" read-only="true"/>
+            <tx:method name="count*" propagation="REQUIRED" read-only="true"/>
+            <tx:method name="find*" propagation="REQUIRED" read-only="true"/>
+            <tx:method name="list*" propagation="REQUIRED" read-only="true"/>
+            <tx:method name="*" propagation="REQUIRED"/>
         </tx:attributes>
     </tx:advice>
-
+    <!--
     <aop:config proxy-target-class="true">
         <aop:pointcut id="interceptorPointCuts" expression="execution(* com.vita.*.*(..))"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="interceptorPointCuts"/>
+    </aop:config>
+    -->
+    <aop:config expose-proxy="true" proxy-target-class="true">
+        <!-- 只对业务逻辑层实施事务 -->
+        <aop:pointcut id="txPointcut" expression="execution(* com.vita.erp.service.*+.*(..))"/>
+        <aop:advisor id="txAdvisor" advice-ref="txAdvice" pointcut-ref="txPointcut"/>
     </aop:config>
 
 
@@ -82,5 +88,28 @@
         <property name="basePackage" value="com.vita.erp.shiro.persistence" />
     </bean>
 
-    <aop:aspectj-autoproxy expose-proxy="true"/>
+    <!-- 以下 validator  ConversionService 在使用 mvc:annotation-driven 会 自动注册-->
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>
+        <!-- 如果不加默认到 使用classpath下的 ValidationMessages.properties -->
+        <property name="validationMessageSource" ref="messageSource"/>
+    </bean>
+
+    <!-- 类型转换及数据格式化 -->
+    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean"/>
+
+    <!-- 国际化的消息资源文件（本系统中主要用于显示/错误消息定制） -->
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basenames">
+            <list>
+                <!-- 在web环境中一定要定位到classpath 否则默认到当前web应用下找  -->
+                <value>classpath:messages</value>
+                <value>classpath:ValidationMessages</value>
+            </list>
+        </property>
+        <property name="useCodeAsDefaultMessage" value="false"/>
+        <property name="defaultEncoding" value="UTF-8"/>
+        <property name="cacheSeconds" value="60"/>
+    </bean>
+
 </beans>

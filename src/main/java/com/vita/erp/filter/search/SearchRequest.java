@@ -89,7 +89,7 @@ public final class SearchRequest extends Searchable {
 
         toSearchFilters(searchParams);
 
-        merge(sort, page);
+        //merge(sort, page);
     }
 
 
@@ -208,7 +208,7 @@ public final class SearchRequest extends Searchable {
 
    /* private String getCustomKey(String key) {
         return key + Condition.separator + SearchOperator.custom;
-    }*/
+    }
 
     @Override
     public Searchable setPage(final Pageable page) {
@@ -217,14 +217,13 @@ public final class SearchRequest extends Searchable {
     }
 
     @Override
-    public Searchable setPage(int pageNumber, int pageSize) {
-        merge(sort, new PageRequest(pageNumber, pageSize));
-        return this;
-    }
-
-    @Override
     public Searchable addSort(final Sort sort) {
         merge(sort, page);
+        return this;
+    }
+    @Override
+    public Searchable setPage(int pageNumber, int pageSize) {
+        merge(sort, new PageRequest(pageNumber, pageSize));
         return this;
     }
 
@@ -233,6 +232,7 @@ public final class SearchRequest extends Searchable {
         merge(new Sort(direction, property), page);
         return this;
     }
+    **/
 
 
 //    @Override
@@ -265,6 +265,7 @@ public final class SearchRequest extends Searchable {
 //        return searchFilters.size() > 0;
 //    }
 
+    /**
     @Override
     public boolean hashSort() {
         return this.sort != null && this.sort.iterator().hasNext();
@@ -282,15 +283,17 @@ public final class SearchRequest extends Searchable {
             this.page = new PageRequest(page.getPageNumber(), page.getPageSize(), null);
         }
     }
+    **/
 
     @Override
     public void removePageable() {
         this.page = null;
     }
-
+   /**
     public Pageable getPage() {
         return page;
     }
+    **/
 
     public Sort getSort() {
         return sort;
@@ -321,7 +324,7 @@ public final class SearchRequest extends Searchable {
 //        return null;
 //    }
 
-
+       /**
     private void merge(Sort sort, Pageable page) {
         if (sort == null) {
             sort = this.sort;
@@ -343,6 +346,7 @@ public final class SearchRequest extends Searchable {
             this.page = null;
         }
     }
+    **/
 
 
     @Override
@@ -382,6 +386,41 @@ public final class SearchRequest extends Searchable {
 
     @Override
     public <T> T getValue(String key) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public Searchable setPage(java.awt.print.Pageable page) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public Searchable setPage(int pageNumber, int pageSize) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public Searchable addSort(Sort sort) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public boolean hashSort() {
+        return false;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void removeSort() {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public boolean hasPageable() {
+        return false;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public java.awt.print.Pageable getPage() {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 

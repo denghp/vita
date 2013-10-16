@@ -86,12 +86,12 @@
     <bean id="logoutFilter" class="org.apache.shiro.web.filter.authc.LogoutFilter">
         <property name="redirectUrl" value="${shiro.logout.success.url}"/>
     </bean>
-    <!--提取系统用户（User） 验证用户是否合法的过滤器（如是否删除了 是否锁定了）
-    <bean id="sysUserFilter" class="org.apache.shiro.web.filter.user.SysUserFilter">
+    <!--提取系统用户（User） 验证用户是否合法的过滤器（如是否删除了 是否锁定了）-->
+    <bean id="sysUserFilter" class="com.vita.erp.filter.user.SysUserFilter">
         <property name="userBlockedUrl" value="${shiro.user.blocked.url}"/>
         <property name="userNotfoundUrl" value="${shiro.user.notfound.url}"/>
         <property name="userUnknownErrorUrl" value="${shiro.user.unknown.error.url}"/>
-    </bean>-->
+    </bean>
     <!-- 验证会话是否是强制退出等的filter
     <bean id="onlineSessionFilter" class="org.apache.shiro.web.filter.online.OnlineSessionFilter">
         <property name="forceLogoutUrl" value="${shiro.user.force.logout.url}"/>
@@ -119,18 +119,20 @@
         <!-- defined will be automatically acquired and available via its beanName in chain        -->
         <!-- definitions, but you can perform instance overrides or name aliases here if you like: -->
         <property name="filters">
-            <util:map>
-                <!--
+            <!--
                 <entry key="authc" value-ref="formAuthenticationFilter"/>
                 -->
+            <util:map>
+
                 <entry key="logout" value-ref="logoutFilter"/>
-                <!--
                 <entry key="sysUser" value-ref="sysUserFilter"/>
-                <entry key="onlineSession" value-ref="onlineSessionFilter"/>
-                <entry key="syncOnlineSession" value-ref="syncOnlineSessionFilter"/>
-                -->
+
                 <entry key="jCaptchaValidate" value-ref="jCaptchaValidateFilter"/>
             </util:map>
+            <!--
+               <entry key="onlineSession" value-ref="onlineSessionFilter"/>
+               <entry key="syncOnlineSession" value-ref="syncOnlineSessionFilter"/>
+               -->
         </property>
         <property name="filterChainDefinitions">
             <value>
@@ -138,7 +140,6 @@
                 /jcaptcha* = anon
                 /logout = logout
                 /login = jCaptchaValidate,authc
-                /** = sysUser,onlineSession,user,syncOnlineSession,perms,roles
             </value>
         </property>
     </bean>

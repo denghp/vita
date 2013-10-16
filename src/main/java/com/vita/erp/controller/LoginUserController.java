@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * Date: 10/16/13
  * Time: 6:09 PM
  */
-@RequestMapping("/admin/sys/user/loginUser")
+@RequestMapping("/sys/User")
 public class LoginUserController {
 
     @Autowired
