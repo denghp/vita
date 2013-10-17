@@ -118,13 +118,53 @@
         </property>
     </bean>
 
-    <!-- 默认的视图解析器 在上边的解析错误时使用 (默认使用html)- -->
+    <!-- 默认的视图解析器 在上边的解析错误时使用 (默认使用html)-
     <bean id="defaultViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"
           p:order="1">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
         <property name="contentType" value="text/html"/>
         <property name="prefix" value="/"/>
         <property name="suffix" value=".jsp"/>
+    </bean>
+   -->
+
+    <!-- freemarker config -->
+    <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="templateLoaderPath" value="/WEB-INF/freemarker/"/>
+        <!--
+        <property name="freemarkerVariables">
+            <map>
+                <entry key="xml_escape" value-ref="fmXmlEscape"/>
+                <entry key="bussinessWapper">
+                    <bean class="com.tuan800.mis.manage.util.BussinessWrapper"/>
+                </entry>
+            </map>
+        </property>
+        -->
+        <property name="freemarkerSettings">
+            <props>
+                <prop key="defaultEncoding">UTF-8</prop>
+                <prop key="number_format">#</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!--
+  View resolvers can also be configured with ResourceBundles or XML files. If you need
+  different view resolving based on Locale, you have to use the mis bundle resolver.
+  -->
+    <bean id="freeMarkerViewResolver"
+          class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="order" value="2"/>
+        <property name="cache" value="true"/>
+        <property name="prefix" value="/"/>
+        <property name="suffix" value=".ftl"/>
+        <property name="exposeRequestAttributes" value="true"/>
+        <property name="exposeSessionAttributes" value="true"/>
+        <property name="exposeSpringMacroHelpers" value="true"/>
+        <property name="allowRequestOverride" value="true" />
+        <property name="contentType" value="text/html;charset=UTF-8"/>
+        <property name="requestContextAttribute" value="rc"/>
     </bean>
 
     <!-- 文件上传相关  one of the properties available;the maximum upload size in bytes 100M

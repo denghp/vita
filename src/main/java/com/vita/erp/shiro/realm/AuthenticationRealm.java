@@ -3,10 +3,9 @@ package com.vita.erp.shiro.realm;
 import com.vita.erp.entity.sys.User;
 import com.vita.erp.service.sys.AuthService;
 import com.vita.erp.service.sys.RoleService;
+import com.vita.erp.service.sys.UserAuthService;
 import com.vita.erp.service.sys.UserService;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -37,6 +36,9 @@ public class AuthenticationRealm extends AuthorizingRealm {
     @Autowired
     private AuthService authService;
 
+    @Autowired
+    private UserAuthService userAuthService;
+
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         //获取username
@@ -45,14 +47,39 @@ public class AuthenticationRealm extends AuthorizingRealm {
         User user = userService.getUserByname(username);
 
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-        //authorizationInfo.setRoles(userAuthService.findStringRoles(user));
-        //authorizationInfo.setStringPermissions(userAuthService.findStringPermissions(user));
-
+        authorizationInfo.setRoles(userAuthService.findStringRoles(user));
+        authorizationInfo.setStringPermissions(userAuthService.findStringPermissions(user));
         return authorizationInfo;
     }
 
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        UsernamePasswordToken upToken = (UsernamePasswordToken) authenticationToken;
+        String username = upToken.getUsername().trim();
+        String password = "";
+        if (upToken.getPassword() != null) {
+            password = new String(upToken.getPassword());
+        }
+
+        User user  = userService.login(username, password);
+
+//        try {
+//            user = userService.login(username, password);
+//        } catch (UserNotExistsException e) {
+//            throw new UnknownAccountException(e.getMessage(), e);
+//        } catch (UserPasswordNotMatchException e) {
+//            throw new AuthenticationException(e.getMessage(), e);
+//        } catch (UserPasswordRetryLimitExceedException e) {
+//            throw new ExcessiveAttemptsException(e.getMessage(), e);
+//        } catch (UserBlockedException e) {
+//            throw new LockedAccountException(e.getMessage(), e);
+//        } catch (Exception e) {
+//            log.error("login error", e);
+//            throw new AuthenticationException(new UserException("user.unknown.error", null));
+//        }
+
+        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user.getUsername(), password.toCharArray(), getName());
+        return info;
     }
+
 }

@@ -68,34 +68,25 @@
                 </h4>
 
                 <div class="space-6"></div>
-                <form id="loginForm" method="post" action="/userLogin" >
+                <form id="loginForm" method="post" action="/userLogin">
                     <input name="userKey" type="hidden" id="userKey" value="D1B5CC2FE46C4CC983C073BCA897935608D926CD32992B5900" />
                     <fieldset>
-                        <div class="form-group">
                         <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="text" name="username" class="form-control" placeholder="Username" />
+															<input type="text" class="form-control" value="${param.username}" placeholder="Username" />
 															<i class="icon-user"></i>
 														</span>
                         </label>
-                         </div>
-                        <div class="form-group">
+
                         <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="password" name="password" class="form-control" placeholder="Password" />
+															<input type="password" class="form-control" value="${param.password} "placeholder="Password" />
 															<i class="icon-lock"></i>
 														</span>
                         </label>
-                            </div>
-                        <!--
                         <label class="block clearfix">
-                                <span class="block input-icon input-icon-right">
-                                <input type="text" id="jcaptchaCode" name="jcaptchaCode"
-                                       class="input-medium validate[required,ajax[ajaxJcaptchaCall]]" placeholder="请输入验证码">
-                                <img class="jcaptcha-btn jcaptcha-img" style="margin-left: 10px;" src="/jcaptcha.jpg" title="点击更换验证码">
-                                </span>
                         </label>
-                            -->
+
                         <div class="space"></div>
 
                         <div class="clearfix">
@@ -164,7 +155,7 @@
                     Enter your email and to receive instructions
                 </p>
 
-                <form id="validation-form">
+                <form>
                     <fieldset>
                         <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
@@ -205,15 +196,13 @@
 
                 <form>
                     <fieldset>
-                        <div class="form-group">
-
                         <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
 															<input type="email" class="form-control" placeholder="Email" />
 															<i class="icon-envelope"></i>
 														</span>
                         </label>
-                        </div>
+
                         <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
 															<input type="text" class="form-control" placeholder="Username" />
@@ -305,25 +294,6 @@
     if("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
 </script>
 
-
-<!-- page specific plugin scripts -->
-<script src="assets/js/jquery.validate.min.js"></script>
-<!--
-<script src="assets/js/bootstrap.min.js"></script>
-<script src="assets/js/typeahead-bs2.min.js"></script>
-<script src="assets/js/fuelux/fuelux.wizard.min.js"></script>
-<script src="assets/js/additional-methods.min.js"></script>
-<script src="assets/js/bootbox.min.js"></script>
-<script src="assets/js/jquery.maskedinput.min.js"></script>
-<script src="assets/js/select2.min.js"></script>
-
-<script src="assets/js/ace-elements.min.js"></script>
-<script src="assets/js/ace.min.js"></script>
--->
-<!-- ace scripts -->
-
-
-
 <!-- inline scripts related to this page -->
 
 <script type="text/javascript">
@@ -332,62 +302,5 @@
         jQuery('#'+id).addClass('visible');
     }
 </script>
-<!--
-<script type="text/javascript">
-    $(function() {
-        //$("#username").focus();
-        $(".jcaptcha-btn").click(function() {
-            var img = $(".jcaptcha-img");
-            var imageSrc = img.attr("src");
-            if(imageSrc.indexOf("?") > 0) {
-                imageSrc = imageSrc.substr(0, imageSrc.indexOf("?"));
-            }
-            imageSrc = imageSrc + "?" + new Date().getTime();
-            img.attr("src", imageSrc);
-        });
-        $.validationEngineLanguage.allRules.ajaxJcaptchaCall={
-            "url": "${rc.getContextPath()}/jcaptcha-validate",
-            "alertTextLoad": "* 正在验证，请稍等。。。"
-        };
-        $("#loginForm").validationEngine({scroll:false});
-    });
-</script>
--->
-<script type="text/javascript">
-    $(document).ready(function(){
-
-        $('#loginForm').validate(
-                {
-                    rules: {
-                        username: {
-                            minlength: 2,
-                            required: true
-                        },
-                        email: {
-                            required: true,
-                            email: true
-                        },
-                        password: {
-                            minlength: 2,
-                            required: true
-                        }
-                    },
-
-                    highlight: function(element) {
-                        //$(element).closest('.form-group').removeClass('success').addClass('error');
-                        $(element).closest('.form-group').removeClass('has-info').addClass('has-error');
-                    },
-                    success: function(element) {
-                        //element
-                        //        .text('OK!').addClass('valid')
-                        //        .closest('.form-group').removeClass('error').addClass('success');
-                        $(element).closest('.form-group').removeClass('has-error').addClass('has-info');
-                        $(element).remove();
-                    }
-                });
-    }); // end document.ready
-</script>
-
-
 </body>
 </html>
