@@ -8,8 +8,8 @@ package com.vita.erp.common.jcaptcha;
 import com.octo.captcha.service.image.DefaultManageableImageCaptchaService;
 
 /**
- * <p>User: Zhang Kaitao
- * <p>Date: 13-3-22 下午3:38
+ * <p>User: denghp
+ * <p>Date: 13-10-15 下午3:38
  * <p>Version: 1.0
  */
 public class EsManageableImageCaptchaService extends DefaultManageableImageCaptchaService {

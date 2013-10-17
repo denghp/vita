@@ -1,3 +1,4 @@
+<#import "/commons/showMessage.ftl" as show>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -63,14 +64,13 @@
     <div class="widget-body">
         <div class="widget-main">
             <h4 class="header blue lighter bigger">
+             <@show.errorMesage />
                 <i class="icon-coffee green"></i>
                 Please Enter Your Information
             </h4>
 
             <div class="space-6"></div>
-            <form id="loginForm" method="post" action="${rc.getContextPath()}/userLogin">
-                <input name="userKey" type="hidden" id="userKey"
-                       value="D1B5CC2FE46C4CC983C073BCA897935608D926CD32992B5900"/>
+            <form id="loginForm" method="post" >
                 <fieldset>
                     <div class="form-group">
                         <label class="block clearfix">

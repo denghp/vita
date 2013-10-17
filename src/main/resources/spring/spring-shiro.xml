@@ -64,8 +64,8 @@
 
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <!-- Single realm app.  If you have multiple realms, use the 'realms' property instead. -->
+        <property name="realm" ref="myBatisRealm"/>
         <!--
-        <property name="realm" ref="userRealm"/>
         <property name="sessionManager" ref="sessionManager"/>
         -->
         <property name="rememberMeManager" ref="rememberMeManager"/>
@@ -73,14 +73,14 @@
 
 
     <!-- filter -->
-    <!--替换默认的form 验证过滤器  表单上的用户名/密码 下次自动登录的参数名
-    <bean id="formAuthenticationFilter" class="org.apache.shiro.web.filter.authc.CustomFormAuthenticationFilter">
+    <!--替换默认的form 验证过滤器  表单上的用户名/密码 下次自动登录的参数名  -->
+    <bean id="formAuthenticationFilter" class="com.vita.erp.filter.authc.CustomFormAuthenticationFilter">
         <property name="defaultSuccessUrl" value="${shiro.default.success.url}"/>
         <property name="adminDefaultSuccessUrl" value="${shiro.admin.default.success.url}"/>
         <property name="usernameParam" value="username"/>
         <property name="passwordParam" value="password"/>
         <property name="rememberMeParam" value="rememberMe"/>
-    </bean>   -->
+    </bean>
 
     <!-- 退出登录过滤器 -->
     <bean id="logoutFilter" class="org.apache.shiro.web.filter.authc.LogoutFilter">
@@ -119,11 +119,8 @@
         <!-- defined will be automatically acquired and available via its beanName in chain        -->
         <!-- definitions, but you can perform instance overrides or name aliases here if you like: -->
         <property name="filters">
-            <!--
-                <entry key="authc" value-ref="formAuthenticationFilter"/>
-                -->
             <util:map>
-
+                <entry key="authc" value-ref="formAuthenticationFilter"/>
                 <entry key="logout" value-ref="logoutFilter"/>
                 <entry key="sysUser" value-ref="sysUserFilter"/>
                 <entry key="jCaptchaValidate" value-ref="jCaptchaValidateFilter"/>
@@ -135,6 +132,7 @@
                 /jcaptcha* = anon
                 /logout = logout
                 /login = jCaptchaValidate,authc
+                /** = sysUser,user,perms,roles
             </value>
         </property>
     </bean>

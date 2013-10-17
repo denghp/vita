@@ -78,6 +78,9 @@ public class SysUserFilter extends AccessControlFilter {
         }
 
         String username = (String) subject.getPrincipal();
+        if (username == null) {
+            return true;
+        }
         //此处注意缓存 防止大量的查询db
         User user = userService.getUserByname(username);
         //把当前用户放到session中

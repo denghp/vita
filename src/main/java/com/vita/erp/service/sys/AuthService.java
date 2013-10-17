@@ -77,12 +77,4 @@ public class AuthService {
         return roleIds;
     }
 
-    /**
-     * Created with smart-erp.
-     * User: denghp
-     * Date: 10/16/13
-     * Time: 1:14 AM
-     */
-    public static class ResourceService {
-    }
 }

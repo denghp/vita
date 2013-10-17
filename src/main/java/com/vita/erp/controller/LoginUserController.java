@@ -46,8 +46,8 @@ public class LoginUserController {
     private MessageSource messageSource;
 
 
-    //@RequestMapping(value = {"/{login:login;?.*}"}) //spring3.2.2 bug see  http://jinnianshilongnian.iteye.com/blog/1831408
-    @RequestMapping(value = "/userLogin")
+    @RequestMapping(value = {"/{login:login;?.*}"}) //spring3.2.2 bug see  http://jinnianshilongnian.iteye.com/blog/1831408
+    //@RequestMapping(value = "/userLogin")
     public String loginForm(HttpServletRequest request, ModelMap model) {
 
         //表示退出
@@ -103,13 +103,14 @@ public class LoginUserController {
             model.remove(Constants.MESSAGE);
         }
 
-        return "/login";
+        return "/login/login";
     }
-
+    /**
     @RequestMapping(value = "/{login:login;?.*}", method = RequestMethod.GET)
     public String index(@ModelAttribute("model") ModelMap model) {
 
         return "/login/login";
     }
+    **/
 
 }
