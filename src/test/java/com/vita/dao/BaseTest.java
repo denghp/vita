@@ -1,4 +1,4 @@
-package com.vita.dao;
+package com.ace.dao;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.runner.RunWith;

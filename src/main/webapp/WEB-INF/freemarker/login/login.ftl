@@ -23,13 +23,13 @@
 
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300"/>
 
-    <!-- ace styles -->
+    <!-- erp styles -->
 
     <link rel="stylesheet" href="assets/css/ace.min.css"/>
     <link rel="stylesheet" href="assets/css/ace-rtl.min.css"/>
 
     <!--[if lte IE 8]>
-    <link rel="stylesheet" href="assets/css/ace-ie.min.css"/>
+    <link rel="stylesheet" href="assets/css/erp-ie.min.css"/>
     <![endif]-->
 
     <!-- inline styles related to this page -->

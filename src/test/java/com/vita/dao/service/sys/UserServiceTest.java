@@ -1,4 +1,4 @@
-package com.vita.dao.service.sys;
+package com.ace.dao.service.sys;
 
 import org.junit.Assert;
 import org.junit.Test;

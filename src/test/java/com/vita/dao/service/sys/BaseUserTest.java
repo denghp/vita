@@ -1,10 +1,10 @@
-package com.vita.dao.service.sys;
+package com.ace.dao.service.sys;
 
-import com.vita.dao.BaseTest;
-import com.vita.erp.entity.sys.User;
+import com.ace.dao.BaseTest;
+import com.ace.erp.entity.sys.User;
 import org.junit.Before;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.vita.erp.service.sys.UserService;
+import com.ace.erp.service.sys.UserService;
 /**
  * Project_Name: smart-erp
  * File: BaseUserTest

@@ -2,10 +2,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.vita</groupId>
-    <artifactId>vita-erp</artifactId>
+    <artifactId>ace-erp</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>vita-erp</name>
+    <name>ace-erp</name>
 
     <properties>
         <spring.version>3.2.3.RELEASE</spring.version>

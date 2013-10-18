@@ -5,17 +5,10 @@
  */
 
 
-package com.vita.dao.service.sys;
-
-import com.vita.erp.common.jcaptcha.JCaptcha;
-import org.junit.Test;
-
-import javax.imageio.ImageIO;
-import javax.servlet.ServletOutputStream;
-import java.awt.image.BufferedImage;
+package com.ace.dao.service.sys;
 
 /**
- * Project_Name: vita-erp
+ * Project_Name: ace-erp
  * File: CaptchaServiceTest
  * User: denghp
  * Date: 10/17/13

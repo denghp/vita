@@ -1,9 +1,9 @@
-package com.vita.dao.service.sys;
+package com.ace.dao.service.sys;
 
-import com.vita.dao.BaseTest;
-import com.vita.erp.entity.sys.User;
-import com.vita.erp.service.sys.UserAuthService;
-import com.vita.erp.service.sys.UserService;
+import com.ace.dao.BaseTest;
+import com.ace.erp.entity.sys.User;
+import com.ace.erp.service.sys.UserAuthService;
+import com.ace.erp.service.sys.UserService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
