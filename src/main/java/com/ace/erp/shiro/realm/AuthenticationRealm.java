@@ -18,7 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 /**
  * Project_Name: smart-erp
  * File: AuthenticationRealm
- * (C) Copyright tuan800 Corporation 2013 All Rights Reserved.
+ * 
  * User: denghp
  * Date: 10/15/13
  * Time: 10:12 AM
